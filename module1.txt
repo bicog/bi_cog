@@ -1,0 +1,53 @@
+/*******************************************************************************
+* File                       : Electricitybill.txt
+* Author name                : Capgemini
+* Desc                       : Program to print the Electricity bill
+* version                    : 1.0
+* Last modified date         : 21-Feb-2018
+*************************************************************************************/
+BEGIN
+      DECLARE username as CHARACTER
+      DECLARE userid, unitconsumed, lastmonthreading, currentmonthreading as INTEGER
+      DECLARE netamount, fixedcharge as FLOAT
+      PROMPT "Enter the user name" AND STORE IN usern/*******ame
+      PROMPT "Enter the user id" AND STORE IN userid
+      INITIALIZE netamount=0
+      PROMPT "Enter last month meter reading" AND STORE IN lastmonthreading
+      PROMPT "Enter current month meter reading" AND STORE IN currentmonthreading
+      CALCULATE unitconsumption(lastmonthreading,currentmonthreading)
+      CALCULATE isamount(unitconsumed)
+      PRINT "User ID" +userid
+      PRINT "User name" +username
+      PRINT "Unit Consumed" +unitconsumed
+      PRINT "Net amount" +netamount
+END
+
+/**********************************************************************************
+* Module name                  : unitconsumed.txt
+* Author name                  : Capgemini
+* Input parameters             : lastmonthreading, currentmonthreading
+* Return type                  : float
+* Creation date                : 21-Feb-2018
+***********************************************************************************/
+SUB unitconsumption(lastmonthreading,currentmonthreading)
+DECLARE unitconsumed as FLOAT
+CALCULATE unitconsumed = lastmonthreading + currentmonthreading
+RETURN unitconsumed
+END SUB
+
+/*************************************************************************************
+* Module name                  : netamount.txt
+* Author name                  : Capgemini
+* Input parameters             : unitconsumed,fixedcharge
+* Return type                 : float
+**************************************************************************************/
+SUB isamount(unitconsumed)
+DECLARE netamount as FLOAT
+DECLARE fixedcharge as INTEGER
+INITIALISE fixedcharge=100
+CALCULATE netamount=unitconsumed*1.15*fixedcharge
+RETURN netamount
+END SUB
+
+
+       
